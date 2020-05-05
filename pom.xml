@@ -19,13 +19,24 @@
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
     </properties>
 
-    <repositories>
-        <repository>
+    <profiles>
+        <profile>
             <id>github</id>
-            <name>GitHub Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/robertzml/hermes-common</url>
-        </repository>
-    </repositories>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/robertzml/hermes-common</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
