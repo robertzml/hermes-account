@@ -32,5 +32,14 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           source: "target/hermes-account-0.0.1-SNAPSHOT.jar,Dockerfile"
           target: ${{ secrets.REMOTE_PATH }}
-          strip_components: 1
+
+      - name: Build Docker Image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            ls -al
+            docker build -t hermes-account:0.0.1 .
 

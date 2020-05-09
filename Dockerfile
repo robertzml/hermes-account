@@ -2,7 +2,7 @@ FROM openjdk:11.0.6
 
 VOLUME /tmp
 
-COPY hermes-account.jar hermes-account.jar
+COPY target/hermes-account-0.0.1-SNAPSHOT.jar hermes-account.jar
 
 # SET TIMEZONE
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
