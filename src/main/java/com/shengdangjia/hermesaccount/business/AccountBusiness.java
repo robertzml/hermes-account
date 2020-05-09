@@ -20,6 +20,15 @@ public class AccountBusiness {
     }
 
     /**
+     * 按ID获取用户
+     * @param id 用户ID
+     * @return
+     */
+    public Account findById(String id) {
+        return accountRepository.findById(id).orElse(null);
+    }
+
+    /**
      * 按手机号查询用户
      *
      * @param telephone 手机号

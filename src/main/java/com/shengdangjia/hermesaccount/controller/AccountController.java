@@ -38,11 +38,24 @@ public class AccountController {
 
     /**
      * 获取用户信息
+     * @param id 用户ID
+     * @return
+     */
+    @ApiOperation("获取用户信息")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    ResponseData findById(@RequestParam(value = "id") String id) {
+        var r = accountBusiness.findById(id);
+        return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
+    }
+
+    /**
+     * 查询用户信息
      *
      * @param telephone 手机号
      * @return 用户信息
      */
-    @ApiOperation("获取用户信息")
+    @ApiOperation("查询用户信息")
     @ApiImplicitParam(name = "telephone", value = "用户手机号", required = true)
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     ResponseData find(@RequestParam(value = "telephone") String telephone) {
