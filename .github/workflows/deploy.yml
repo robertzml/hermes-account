@@ -40,6 +40,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            cd ${{ secrets.REMOTE_PATH }}
             ls -al
             docker build -t hermes-account:0.0.1 .
 
