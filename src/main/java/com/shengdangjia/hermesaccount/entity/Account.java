@@ -1,5 +1,8 @@
 package com.shengdangjia.hermesaccount.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,33 +13,43 @@ import java.sql.Timestamp;
 /**
  * 账户类
  */
+@ApiModel(description = "账户类")
 @Entity
 @Table(name = "at_account")
 public class Account {
 
+    @ApiModelProperty(value = "Id")
     @Id
     private String id;
 
+    @ApiModelProperty(value = "用户名")
     private String userName;
 
     private String password;
 
-    @NotEmpty(message = "电话不能为空")
+    @ApiModelProperty(value = "手机号")
+    @NotEmpty(message = "手机号不能为空")
     private String telephone;
 
+    @ApiModelProperty(value = "IMEI")
     private String imei;
 
+    @ApiModelProperty(value = "真实姓名")
     private String realName;
 
+    @ApiModelProperty(value = "身份证号")
     private String identityCard;
 
+    @ApiModelProperty(value = "Email")
     private String email;
 
     @Column(name = "wx_openid")
     private String wxOpenId;
 
+    @ApiModelProperty(value = "注册时间")
     private Timestamp registerTime;
 
+    @ApiModelProperty(value = "用户状态")
     private int status;
 
     public String getId() {
