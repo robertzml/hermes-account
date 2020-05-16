@@ -1,8 +1,14 @@
 package com.shengdangjia.hermesaccount.controller;
 
+import com.shengdangjia.hermesaccount.business.AccountBusiness;
+import com.shengdangjia.hermesaccount.model.LoginModel;
 import com.shengdangjia.hermescommon.model.ErrorCode;
 import com.shengdangjia.hermescommon.model.ResponseData;
 import com.shengdangjia.hermescommon.utility.RestHelper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,13 +17,32 @@ import org.springframework.web.bind.annotation.RestController;
  * 认证控制器
  * 处理用户登录
  */
+@Api(tags = "用户注册登录接口")
 @RequestMapping(value = "auth")
 @RestController
 public class AuthController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    ResponseData login() {
+    @Autowired
+    AccountBusiness accountBusiness;
 
-        return RestHelper.makeResponse(null, ErrorCode.SUCCESS);
+    /**
+     * 用户登录
+     * @param model 登录提交
+     * @return
+     */
+    @ApiImplicitParam(name = "model", value = "用户注册信息", required = true)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    ResponseData login(@RequestBody LoginModel model) {
+        try {
+            var account = accountBusiness.findByTelephone(model.telephone);
+            if (account == null) {
+                return RestHelper.makeResponse(null, ErrorCode.OBJECT_NOT_FOUND);
+            }
+
+            return RestHelper.makeResponse(null, ErrorCode.SUCCESS);
+        } catch (Exception e) {
+            return RestHelper.makeResponse(null, ErrorCode.DATABASE_FAILED);
+        }
+
     }
 }
