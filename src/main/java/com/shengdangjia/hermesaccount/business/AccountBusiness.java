@@ -5,6 +5,8 @@ import com.shengdangjia.hermesaccount.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 public class AccountBusiness {
     @Autowired
@@ -15,7 +17,7 @@ public class AccountBusiness {
      *
      * @return
      */
-    public Iterable<Account> findAll() {
+    public List<Account> findAll() {
         return accountRepository.findAll();
     }
 

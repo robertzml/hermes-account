@@ -37,12 +37,7 @@ public class AccountController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     ResponseData<List<Account>> getAll() {
         var r = accountBusiness.findAll();
-
-        List<Account> data = new ArrayList<Account>();
-
-        r.forEach(data::add);
-
-        return RestHelper.makeResponse(data, ErrorCode.SUCCESS);
+        return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
     }
 
     /**
