@@ -13,6 +13,9 @@ import java.time.Duration;
 public class AuthBusiness {
 
     @Autowired
+    ActionBusiness actionBusiness;
+
+    @Autowired
     StringRedisTemplate stringRedisTemplate;
 
     /**
@@ -24,7 +27,7 @@ public class AuthBusiness {
      */
     public String login(Account account) throws HermesException {
         // 保存操作记录
-        // this.actionBusiness.insert(account.id, (short) 2, account.imei);
+        this.actionBusiness.insert(account.getId(), (short) 2, account.getImei());
 
         // 生成id token
         var token = JwtHelper.createIdJWT(account.getId());
