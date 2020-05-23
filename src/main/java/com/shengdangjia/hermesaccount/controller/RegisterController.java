@@ -22,17 +22,16 @@ public class RegisterController {
 
     /**
      * 用户注册
-     *
+     * 发送验证码，返回验证码token
      * @param telephone 电话号码
      * @return token
      */
-    @ApiOperation("用户注册")
+    @ApiOperation(value = "用户注册", notes = "发送验证码，返回验证码token")
     @ApiImplicitParam(name = "telephone", value = "手机号", required = true)
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     ResponseData<String> signUp(@RequestParam(value = "telephone") String telephone) {
         try {
             var token = accountBusiness.register(telephone);
-
             return RestHelper.makeResponse(token, ErrorCode.SUCCESS);
         } catch (HermesException e) {
             return RestHelper.makeResponse(null, e.getCode(), e.getMessage());
@@ -43,7 +42,7 @@ public class RegisterController {
 
     /**
      * 注册确认
-     *
+     * 比较验证码，添加用户
      * @param model 确认参数
      * @return
      */

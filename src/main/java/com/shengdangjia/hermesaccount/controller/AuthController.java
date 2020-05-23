@@ -2,7 +2,6 @@ package com.shengdangjia.hermesaccount.controller;
 
 import com.shengdangjia.hermesaccount.business.AccountBusiness;
 import com.shengdangjia.hermesaccount.business.AuthBusiness;
-import com.shengdangjia.hermesaccount.entity.Account;
 import com.shengdangjia.hermesaccount.model.LoginConfirmModel;
 import com.shengdangjia.hermesaccount.model.LoginModel;
 import com.shengdangjia.hermescommon.model.ErrorCode;

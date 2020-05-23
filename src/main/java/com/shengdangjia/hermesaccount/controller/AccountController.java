@@ -34,7 +34,7 @@ public class AccountController {
      */
     @ApiOperation("获取用户列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    ResponseData<List<Account>> getAll() {
+    ResponseData<List<Account>> findAll() {
         var r = accountBusiness.findAll();
         return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
     }
@@ -54,7 +54,6 @@ public class AccountController {
 
     /**
      * 查询用户信息
-     *
      * @param telephone 手机号
      * @return 用户信息
      */
