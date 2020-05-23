@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.time.Duration;
 
+
 @Configuration
 public class AuthBusiness {
 
@@ -21,6 +22,7 @@ public class AuthBusiness {
     /**
      * 用户登录
      * IMEI 一致时直接登录，保存id token
+     *
      * @param account 用户信息
      * @return Id Token
      * @throws HermesException

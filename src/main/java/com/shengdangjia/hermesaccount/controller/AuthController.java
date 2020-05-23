@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 认证控制器
  * 处理用户登录
  */
-@Api(tags = "用户注册登录接口")
+@Api(tags = "用户登录认证接口")
 @RequestMapping(value = "auth")
 @RestController
 public class AuthController {
