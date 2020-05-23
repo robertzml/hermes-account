@@ -34,7 +34,6 @@ public class ActionBusiness {
         action.id = UUID.randomUUID().toString();
         action.userId = userId;
         action.type = type;
-        System.out.println(System.currentTimeMillis());
         action.logTime = new Timestamp(System.currentTimeMillis());
         action.parameter1 = parameter1;
 

@@ -6,6 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 /**
@@ -60,4 +61,16 @@ public class SMSHelper {
         }
     }
 
+    /**
+     * 生成手机验证码
+     * @return 六位验证码
+     */
+    public static String generateCode() {
+        StringBuilder code = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 6; i++) {
+            code.append(random.nextInt(10));
+        }
+        return code.toString();
+    }
 }

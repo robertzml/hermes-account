@@ -1,5 +1,6 @@
 package com.shengdangjia.hermesaccount.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -8,12 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
- * 账户类
+ * 用户类
  */
-@ApiModel(description = "账户类")
+@ApiModel(description = "用户类")
 @Entity
 @Table(name = "at_account")
 public class Account {
@@ -25,6 +26,7 @@ public class Account {
     @ApiModelProperty(value = "用户名")
     private String userName;
 
+    @JsonIgnore
     private String password;
 
     @ApiModelProperty(value = "手机号")
@@ -43,11 +45,12 @@ public class Account {
     @ApiModelProperty(value = "Email")
     private String email;
 
+    @ApiModelProperty(value = "微信openid")
     @Column(name = "wx_openid")
     private String wxOpenId;
 
     @ApiModelProperty(value = "注册时间")
-    private Timestamp registerTime;
+    private LocalDateTime registerTime;
 
     @ApiModelProperty(value = "用户状态")
     private int status;
@@ -124,11 +127,11 @@ public class Account {
         this.wxOpenId = wxOpenId;
     }
 
-    public Timestamp getRegisterTime() {
+    public LocalDateTime getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(Timestamp registerTime) {
+    public void setRegisterTime(LocalDateTime registerTime) {
         this.registerTime = registerTime;
     }
 

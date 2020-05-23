@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.List;
 import java.util.Random;
@@ -54,7 +55,7 @@ public class AccountBusiness {
         }
 
         // 发送验证码
-        String verifyCode = generateCode();
+        String verifyCode = SMSHelper.generateCode();
         var result = SMSHelper.sendVerifyCode(telephone, verifyCode);
         if (!result) {
             throw new HermesException(22, "发送验证码失败");
@@ -89,7 +90,7 @@ public class AccountBusiness {
         account.setId(uid);
         account.setTelephone(telephone);
         account.setImei(imei);
-        account.setRegisterTime(new Timestamp(System.currentTimeMillis()));
+        account.setRegisterTime(LocalDateTime.now());
         account.setStatus(0);
         var t = accountRepository.save(account);
 
@@ -132,17 +133,4 @@ public class AccountBusiness {
         return accountRepository.findByTelephone(telephone);
     }
 
-    /**
-     * 生成手机验证码
-     *
-     * @return 六位验证码
-     */
-    private String generateCode() {
-        StringBuilder code = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            code.append(random.nextInt(10));
-        }
-        return code.toString();
-    }
 }
