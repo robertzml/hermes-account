@@ -6,7 +6,7 @@ import com.shengdangjia.hermescommon.model.ErrorCode;
 import com.shengdangjia.hermescommon.model.HermesException;
 import com.shengdangjia.hermescommon.model.ResponseData;
 import com.shengdangjia.hermescommon.utility.RestHelper;
-import io.swagger.annotations.Api;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +21,15 @@ public class RegisterController {
     AccountBusiness accountBusiness;
 
     /**
-     * 用户注册接口
+     * 用户注册
      *
      * @param telephone 电话号码
      * @return token
      */
+    @ApiOperation("用户注册")
+    @ApiImplicitParam(name = "telephone", value = "手机号", required = true)
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
-    ResponseData signUp(@RequestParam(value = "telephone") String telephone) {
+    ResponseData<String> signUp(@RequestParam(value = "telephone") String telephone) {
         try {
             var token = accountBusiness.register(telephone);
 
@@ -40,11 +42,13 @@ public class RegisterController {
     }
 
     /**
-     * 注册确认接口
+     * 注册确认
      *
      * @param model 确认参数
      * @return
      */
+    @ApiOperation("用户注册确认")
+    @ApiImplicitParam(name = "model", value = "确认参数", required = true)
     @RequestMapping(value = "/signUpConfirm", method = RequestMethod.POST)
     ResponseData signUpConfirm(@RequestBody RegisterConfirmModel model) {
         try {

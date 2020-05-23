@@ -17,16 +17,19 @@ public class RegisterConfirmModel {
     /**
      * IMEI
      */
+    @ApiModelProperty(value = "IMEI")
     public String imei;
 
     /**
      * 验证码token
      */
+    @ApiModelProperty(value = "验证码token")
     public String token;
 
     /**
      * 验证码
      */
+    @ApiModelProperty(value = "验证码")
     public String verifyCode;
 
     public RegisterConfirmModel() {}

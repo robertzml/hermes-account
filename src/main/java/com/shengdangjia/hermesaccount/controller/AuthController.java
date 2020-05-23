@@ -35,7 +35,7 @@ public class AuthController {
      * @param model 登录提交
      * @return
      */
-    @ApiImplicitParam(name = "model", value = "用户注册信息", required = true)
+    @ApiImplicitParam(name = "model", value = "用户登录信息", required = true)
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     ResponseData<String> login(@RequestBody LoginModel model) {
         try {
@@ -55,6 +55,5 @@ public class AuthController {
         } catch (Exception e) {
             return RestHelper.makeResponse(null, ErrorCode.DATABASE_FAILED);
         }
-
     }
 }

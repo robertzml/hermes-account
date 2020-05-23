@@ -22,6 +22,7 @@ import java.util.Random;
  */
 @Configuration
 public class AccountBusiness {
+    //region 字段
     @Autowired
     AccountRepository accountRepository;
 
@@ -30,6 +31,8 @@ public class AccountBusiness {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
+    //endregion
+
 
     //region 注册过程
 
