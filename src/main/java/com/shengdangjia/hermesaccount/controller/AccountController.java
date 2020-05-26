@@ -7,8 +7,10 @@ import com.shengdangjia.hermescommon.model.ResponseData;
 import com.shengdangjia.hermescommon.utility.RestHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +34,7 @@ public class AccountController {
      *
      * @return
      */
-    @ApiOperation("获取用户列表")
+    @ApiOperation(value = "获取用户列表", notes = "返回所有用户信息")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     ResponseData<List<Account>> findAll() {
         var r = accountBusiness.findAll();
@@ -40,30 +42,32 @@ public class AccountController {
     }
 
     /**
-     * 获取用户信息
-     * @param id 用户ID
-     * @return
-     */
-    @ApiOperation("获取用户信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true)
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    ResponseData<Account> findById(@RequestParam(value = "id") String id) {
-        var r = accountBusiness.findById(id);
-        return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
-    }
-
-    /**
      * 查询用户信息
+     * 用户ID、手机号选一
+     * @param id 用户ID
      * @param telephone 手机号
      * @return 用户信息
      */
-    @ApiOperation("查询用户信息")
-    @ApiImplicitParam(name = "telephone", value = "用户手机号", required = true)
+    @ApiOperation(value = "获取用户信息", notes = "根据用户ID或手机号获取用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户ID"),
+            @ApiImplicitParam(name = "telephone", value = "用户手机号")
+    })
     @RequestMapping(value = "/find", method = RequestMethod.GET)
-    ResponseData<Account> find(@RequestParam(value = "telephone") String telephone) {
-        var r = accountBusiness.findByTelephone(telephone);
+    ResponseData<Account> find(@RequestParam(value = "id", required = false) String id,
+                               @RequestParam(value = "telephone", required = false) String telephone) {
+        if (!StringUtils.isEmpty(id)) {
+            var r = accountBusiness.findById(id);
+            return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
+        }
 
-        // logUtility.verbose("find user", "find user by " + telephone);
-        return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
+        if (!StringUtils.isEmpty(telephone)) {
+            var r = accountBusiness.findByTelephone(telephone);
+
+            // logUtility.verbose("find user", "find user by " + telephone);
+            return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
+        }
+
+        return RestHelper.makeResponse(null, ErrorCode.ERROR);
     }
 }

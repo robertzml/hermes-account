@@ -37,7 +37,7 @@ public class AuthController {
      * @param model 登录提交
      * @return 成功返回Id token，失败返回验证码 token
      */
-    @ApiOperation(value = "用户登录", notes = "验证IMEI，一致则直接登录，不一致则发送验证码")
+    @ApiOperation(value = "用户登录", notes = "验证IMEI，一致则直接登录，返回Id token。不一致则发送验证码，返回验证码token。")
     @ApiImplicitParam(name = "model", value = "用户登录信息", required = true)
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     ResponseData<String> login(@RequestBody LoginModel model) {
@@ -69,7 +69,7 @@ public class AuthController {
      * @param model 登录确认模型
      * @return id token
      */
-    @ApiOperation(value = "用户登录确认", notes = "比较验证码")
+    @ApiOperation(value = "用户登录确认", notes = "比较验证码，通过后返回id token")
     @ApiImplicitParam(name = "model", value = "用户登录确认信息", required = true)
     @RequestMapping(value = "/loginConfirm", method = RequestMethod.POST)
     public ResponseData<String> loginConfirm(@RequestBody LoginConfirmModel model) {
