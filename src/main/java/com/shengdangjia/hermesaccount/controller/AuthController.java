@@ -10,6 +10,7 @@ import com.shengdangjia.hermescommon.utility.RestHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,6 @@ public class AuthController {
      * @return 成功返回Id token，失败返回验证码 token
      */
     @ApiOperation(value = "用户登录", notes = "验证IMEI，一致则直接登录，返回Id token。不一致则发送验证码，返回验证码token。")
-    @ApiImplicitParam(name = "model", value = "用户登录信息", required = true)
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     ResponseData<String> login(@RequestBody LoginModel model) {
         try {
@@ -70,7 +70,6 @@ public class AuthController {
      * @return id token
      */
     @ApiOperation(value = "用户登录确认", notes = "比较验证码，通过后返回id token")
-    @ApiImplicitParam(name = "model", value = "用户登录确认信息", required = true)
     @RequestMapping(value = "/loginConfirm", method = RequestMethod.POST)
     public ResponseData<String> loginConfirm(@RequestBody LoginConfirmModel model) {
         try {

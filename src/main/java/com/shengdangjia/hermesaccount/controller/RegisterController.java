@@ -47,9 +47,8 @@ public class RegisterController {
      * @return
      */
     @ApiOperation("用户注册确认")
-    @ApiImplicitParam(name = "model", value = "确认参数", required = true)
     @RequestMapping(value = "/signUpConfirm", method = RequestMethod.POST)
-    ResponseData signUpConfirm(@RequestBody RegisterConfirmModel model) {
+    ResponseData signUpConfirm(@ApiParam @RequestBody RegisterConfirmModel model) {
         try {
             accountBusiness.registerFinish(model.telephone, model.imei, model.token, model.verifyCode);
             return RestHelper.makeResponse(null, ErrorCode.SUCCESS);

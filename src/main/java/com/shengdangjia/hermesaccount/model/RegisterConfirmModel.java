@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 注册确认模型
  */
-@ApiModel(value = "注册确认模型")
+@ApiModel(value = "注册确认模型", description = "注册确认模型")
 public class RegisterConfirmModel {
     /**
      * 手机号
