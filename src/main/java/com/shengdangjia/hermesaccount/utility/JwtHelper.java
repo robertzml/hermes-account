@@ -1,7 +1,12 @@
 package com.shengdangjia.hermesaccount.utility;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -38,5 +43,47 @@ public class JwtHelper {
                 .sign(algorithm);
 
         return token;
+    }
+
+    /**
+     * 验证id token
+     * @param token 令牌
+     * @return JWT数据
+     */
+    public static boolean decodeAccessToken(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC384(key);
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("auth")
+                    .withSubject("id token")
+                    .acceptExpiresAt(1)
+                    .build(); //Reusable verifier instance
+            DecodedJWT jwt = verifier.verify(token);
+
+            var dt = jwt.getExpiresAt();
+            LocalDateTime ldt = dt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            String uid = jwt.getClaim("uid").asString();
+
+//            JwtState state = new JwtState();
+//            state.setSuccess(true);
+//            state.setExpire(false);
+//            state.setExpireTime(ldt);
+//            state.setUid(uid);
+
+            return true;
+        } catch (TokenExpiredException e) {
+//            JwtState state = new JwtState();
+//            state.setSuccess(false);
+//            state.setExpire(true);
+//            return state;
+            return false;
+        } catch (JWTVerificationException e) {
+//            JwtState state = new JwtState();
+//            state.setSuccess(false);
+//            state.setExpire(false);
+//            return state;
+            return  false;
+        }
     }
 }
