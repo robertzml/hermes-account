@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,6 +30,9 @@ public class AccountController {
     @Autowired
     AccountBusiness accountBusiness;
 
+    @Autowired
+    HttpServletRequest request;
+
     /**
      * 获取用户列表
      *
@@ -37,6 +41,12 @@ public class AccountController {
     @ApiOperation(value = "获取用户列表", notes = "返回所有用户信息")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     ResponseData<List<Account>> findAll() {
+        var access = request.getHeader("Access Token");
+        System.out.println(access);
+
+        var auth = request.getHeader("Authorization");
+        System.out.println(auth);
+
         var r = accountBusiness.findAll();
         return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
     }
