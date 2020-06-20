@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.shengdangjia</groupId>
     <artifactId>hermes-account</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>hermes-account</name>
     <description>Account Manage for Spring Boot</description>
 

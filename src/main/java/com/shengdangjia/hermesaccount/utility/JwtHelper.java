@@ -46,16 +46,16 @@ public class JwtHelper {
     }
 
     /**
-     * 验证id token
+     * 验证access token
      * @param token 令牌
      * @return JWT数据
      */
-    public static boolean decodeAccessToken(String token) {
+    public static JwtState decodeAccessToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC384(key);
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer("auth")
-                    .withSubject("id token")
+                    .withSubject("access token")
                     .acceptExpiresAt(1)
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
@@ -63,27 +63,23 @@ public class JwtHelper {
             var dt = jwt.getExpiresAt();
             LocalDateTime ldt = dt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-            String uid = jwt.getClaim("uid").asString();
+            JwtState state = new JwtState();
+            state.success = true;
+            state.isExpire = false;
+            state.uid = jwt.getClaim("uid").asString();;
+            state.subject = jwt.getClaim("sub").asString();
 
-//            JwtState state = new JwtState();
-//            state.setSuccess(true);
-//            state.setExpire(false);
-//            state.setExpireTime(ldt);
-//            state.setUid(uid);
-
-            return true;
+            return state;
         } catch (TokenExpiredException e) {
-//            JwtState state = new JwtState();
-//            state.setSuccess(false);
-//            state.setExpire(true);
-//            return state;
-            return false;
+            JwtState state = new JwtState();
+            state.success = false;
+            state.isExpire = true;
+            return state;
         } catch (JWTVerificationException e) {
-//            JwtState state = new JwtState();
-//            state.setSuccess(false);
-//            state.setExpire(false);
-//            return state;
-            return  false;
+            JwtState state = new JwtState();
+            state.success = false;
+            state.isExpire = false;
+            return state;
         }
     }
 }

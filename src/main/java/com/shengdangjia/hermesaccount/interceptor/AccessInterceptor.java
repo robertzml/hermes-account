@@ -16,11 +16,11 @@ public class AccessInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        var result = JwtHelper.decodeAccessToken(token);
+        var jwtState = JwtHelper.decodeAccessToken(token);
 
         System.out.println("interceptor: " + token);
 
-        return result;
+        return jwtState.success;
     }
 
     @Override
