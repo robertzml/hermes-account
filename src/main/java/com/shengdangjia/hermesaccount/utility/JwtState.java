@@ -8,4 +8,6 @@ public class JwtState {
     public boolean success;
 
     public boolean isExpire;
+
+    public String errorMessage;
 }

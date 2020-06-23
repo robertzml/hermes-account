@@ -74,11 +74,13 @@ public class JwtHelper {
             JwtState state = new JwtState();
             state.success = false;
             state.isExpire = true;
+            state.errorMessage = "access token 已超时";
             return state;
         } catch (JWTVerificationException e) {
             JwtState state = new JwtState();
             state.success = false;
             state.isExpire = false;
+            state.errorMessage = "access token 认证失败";
             return state;
         }
     }
