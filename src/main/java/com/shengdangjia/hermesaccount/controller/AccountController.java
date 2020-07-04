@@ -2,6 +2,7 @@ package com.shengdangjia.hermesaccount.controller;
 
 import com.shengdangjia.hermesaccount.business.AccountBusiness;
 import com.shengdangjia.hermesaccount.entity.Account;
+import com.shengdangjia.hermesaccount.utility.LogUtility;
 import com.shengdangjia.hermescommon.model.ErrorCode;
 import com.shengdangjia.hermescommon.model.ResponseData;
 import com.shengdangjia.hermescommon.utility.RestHelper;
@@ -68,7 +69,7 @@ public class AccountController {
         if (!StringUtils.isEmpty(telephone)) {
             var r = accountBusiness.findByTelephone(telephone);
 
-            // logUtility.verbose("find user", "find user by " + telephone);
+            LogUtility.verbose("find user", "find user by " + telephone);
             return RestHelper.makeResponse(r, ErrorCode.SUCCESS);
         }
 

@@ -55,7 +55,7 @@ public class JwtHelper {
             Algorithm algorithm = Algorithm.HMAC384(key);
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer("auth")
-                    .withSubject("access token")
+                    //.withSubject("access token")
                     .acceptExpiresAt(1)
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);

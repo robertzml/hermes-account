@@ -6,6 +6,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * access id 拦截器注册
+ */
 @Configuration
 public class AccessConfig implements WebMvcConfigurer {
     @Override
