@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.shengdangjia</groupId>
     <artifactId>hermes-account</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <name>hermes-account</name>
-    <description>Account Manage for Spring Boot</description>
+    <description>Account Manage for Spring Boot.</description>
 
     <properties>
         <java.version>11</java.version>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.shengdangjia</groupId>
             <artifactId>hermes-common</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.6</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

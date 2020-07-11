@@ -4,6 +4,7 @@ import com.shengdangjia.hermesaccount.business.AccountBusiness;
 import com.shengdangjia.hermesaccount.business.AuthBusiness;
 import com.shengdangjia.hermesaccount.model.LoginConfirmModel;
 import com.shengdangjia.hermesaccount.model.LoginModel;
+import com.shengdangjia.hermesaccount.utility.LogUtility;
 import com.shengdangjia.hermescommon.model.ErrorCode;
 import com.shengdangjia.hermescommon.model.ResponseData;
 import com.shengdangjia.hermescommon.utility.RestHelper;
@@ -51,6 +52,7 @@ public class AuthController {
                 // IMEI 一致
                 var token = this.authBusiness.login(account);
 
+                LogUtility.verbose("login", String.format("user %s is login.", model.telephone));
                 return RestHelper.makeResponse(token, ErrorCode.SUCCESS);
             } else {
                 // IMEI 不一致
@@ -75,6 +77,7 @@ public class AuthController {
         try {
             var token = this.authBusiness.loginConfirm(model.telephone, model.imei, model.token, model.verifyCode);
 
+            LogUtility.verbose("loginConfirm", String.format("user %s is login, imei: %s", model.telephone, model.imei));
             return RestHelper.makeResponse(token, ErrorCode.SUCCESS);
         } catch (Exception e) {
             return RestHelper.makeResponse(null, ErrorCode.DATABASE_FAILED);

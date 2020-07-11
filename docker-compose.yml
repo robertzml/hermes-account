@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   hermes-account-1:
-    image: hermes-account:0.1.0
+    image: hermes-account:0.1.1
     container_name: hermes-account01
     ports:
       - "10010:8080"
@@ -13,7 +13,7 @@ services:
     networks:
       hermes-net:
   hermes-account-2:
-    image: hermes-account:0.1.0
+    image: hermes-account:0.1.1
     container_name: hermes-account02
     ports:
       - "10011:8080"

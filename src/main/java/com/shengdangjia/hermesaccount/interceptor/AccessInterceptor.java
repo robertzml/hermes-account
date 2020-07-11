@@ -28,7 +28,7 @@ public class AccessInterceptor implements HandlerInterceptor {
 
         var jwtState = JwtHelper.decodeAccessToken(token);
 
-        System.out.println("interceptor: " + token);
+        // System.out.println("interceptor: " + token);
 
         if (jwtState.success) {
             return true;
